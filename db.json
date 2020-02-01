@@ -2,30 +2,30 @@
 	"users": [
 		{
 		  "id": 1,
-		  "email": "admin@gomel.ivc.by",
+		  "email": "admin@test.by",
 		  "password": "12345678",
 		  "name": "Администратор"
 		},
 		{
 		  "id": 2,
-		  "email": "dispetcher@gomel.ivc.by",
+		  "email": "dispetcher@test.by",
 		  "password": "dispetcher",
 		  "name": "Dispetcher"
 		},
 		{
 		  "id": 3,
-		  "email": "ivanov@gomel.ivc.by",
+		  "email": "ivanov@test.by",
 		  "password": "ivanov",
 		  "name": "Ivanov"
 		},{
 		  "id": 4,
-		  "email": "petrov@gomel.ivc.by",
+		  "email": "petrov@test.by",
 		  "password": "petrov",
 		  "name": "Petrov"
 		},
 		{
 		  "id": 5,
-		  "email": "sidorov@gomel.ivc.by",
+		  "email": "sidorov@test.by",
 		  "password": "sidorov",
 		  "name": "Sidorov"
 		}

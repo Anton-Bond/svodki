@@ -7,6 +7,8 @@ import { FruitComponent } from './fruit/fruit.component';
 import { VegetablesComponent } from './vegetables/vegetables.component';
 import { SeedlingsComponent } from './seedlings/seedlings.component';
 import { SidebarComponent } from './shared/components/sidebar/sidebar.component';
+import { HeaderComponent } from './shared/components/header/header.component';
+import { DropdownDirective } from './shared/directives/dropdown.directive';
 
 
 @NgModule({
@@ -15,7 +17,9 @@ import { SidebarComponent } from './shared/components/sidebar/sidebar.component'
     FruitComponent,
     VegetablesComponent,
     SeedlingsComponent,
-    SidebarComponent
+    SidebarComponent,
+    HeaderComponent,
+    DropdownDirective
   ],
   imports: [
     CommonModule,
