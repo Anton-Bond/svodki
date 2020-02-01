@@ -15,7 +15,7 @@ import { Message } from '../shared/models/message.model';
 export class LoginComponent implements OnInit {
 
   form: FormGroup;
-  message: Message = new Message();
+  message: Message;
 
   constructor(
     private usersService: UsersService,
@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
   ) { }
  
   ngOnInit() {
-
+    this.message = new Message('danger', '');
     this.form = new FormGroup({
       email: new FormControl(null, [
         Validators.required,
@@ -37,9 +37,6 @@ export class LoginComponent implements OnInit {
       ]),    
     })
 
-    this.message.type = 'danger';
-    this.message.text = '';
-
     this.route.queryParams.subscribe((params: Params) => {
       setTimeout(() => {
         this.message.text = params['text'];
@@ -49,20 +46,27 @@ export class LoginComponent implements OnInit {
 
   }
 
+  private showMessage(text: string, type: string = 'danger') {
+    this.message = new Message(type, text);
+  }
+
   onSubmit() {
     const formData = this.form.value;
     this.usersService.getUserByEmail(formData.email)
       .subscribe((user: User) => {
-        if (!user || user.password !== formData.password) {
-            this.message.type = 'danger';
-            this.message.text = 'Такого пользователя не существует';
+        if (user) {
+          if ( user.password === formData.password) {
+            this.authService.login(user);
+            this.showMessage('');
+            this.router.navigate(
+              ['/system', 'fruit']
+            );
+          } else {
+            this.showMessage('Пароль не верный');
+          }
         } else {
-          this.authService.login(user);
-          console.log(this.form);
-          // this.router.navigate(
-          //   ['/system', 'sidebar']
-          // );
-        }
+          this.showMessage('Такого пользователя не существует');
+        } 
       });
   }
 

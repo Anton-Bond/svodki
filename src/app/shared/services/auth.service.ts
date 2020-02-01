@@ -14,7 +14,8 @@ export class AuthService {
   }
 
   logout() {
-    window.localStorage.removeItem('user');
+    //window.localStorage.removeItem('user');
+    window.localStorage.clear();
   }
 
   isLoggedIn(): boolean {
