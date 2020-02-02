@@ -56,10 +56,10 @@ export class LoginComponent implements OnInit {
       .subscribe((user: User) => {
         if (user) {
           if ( user.password === formData.password) {
-            this.authService.login(user);
             this.showMessage('');
+            this.authService.login(user);
             this.router.navigate(
-              ['/system', 'fruit']
+              ['/system', 'buh', 'bill']
             );
           } else {
             this.showMessage('Пароль не верный');

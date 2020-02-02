@@ -6,14 +6,31 @@
 		<nav class="menu">
 			<ul class="nav metismenu">
 				<li routerLinkActive="active">
-					<a [routerLink]="['/system', 'fruit']"> <i class="fa fa-building-o"></i> Сбор фруктов </a>
+					<a [routerLink]="['/system', 'inputs', 'fruit']"> <i class="fa fa-building-o"></i> Сбор фруктов </a>
 				</li>
 				<li routerLinkActive="active">
-					<a [routerLink]="['/system', 'vegetables']"> <i class="fa fa-flash"></i> Сбор овощей </a>
+					<a [routerLink]="['/system', 'inputs', 'vegetable']"> <i class="fa fa-flash"></i> Сбор овощей </a>
 				</li>
 				<li routerLinkActive="active">
-					<a [routerLink]="['/system', 'seedlings']"> <i class="fa fa-archive"></i> Саженцы </a>
+					<a [routerLink]="['/system', 'inputs', 'seedling']"> <i class="fa fa-archive"></i> Саженцы </a>
 				</li>
+				<li routerLinkActive="active">
+
+					<a [routerLink]="['/system', 'inputs', 'seedling']"> <i class="fa fa-archive"></i> ------- </a>
+				</li>
+				<li routerLinkActive="active">
+					<a [routerLink]="['/system', 'buh', 'bill']"> <i class="fa fa-archive"></i> Счет </a>
+				</li>
+				<li routerLinkActive="active">
+					<a [routerLink]="['/system', 'buh', 'history']"> <i class="fa fa-archive"></i> История </a>
+				</li>
+				<li routerLinkActive="active">
+					<a [routerLink]="['/system', 'buh', 'planning']"> <i class="fa fa-archive"></i> Планирование </a>
+				</li>
+				<li routerLinkActive="active">
+					<a [routerLink]="['/system', 'buh', 'records']"> <i class="fa fa-archive"></i> Запись </a>
+				</li>
+				
 			</ul>
 		</nav>
 	</div>
