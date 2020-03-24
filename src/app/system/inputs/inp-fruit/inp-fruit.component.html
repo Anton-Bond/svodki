@@ -1,1 +1,80 @@
-<p>inp-fruit works!</p>
+<h3>Итоги по сбору фруkтов</h3>
+
+<p>Заполните поля</p>
+
+<form [formGroup]="form">
+
+	<div class="form-group row">
+    <label for="apple" class="col-sm-2 col-form-label">Яблоки, кг:</label>
+    <div class="col-sm-2">
+      <input *ngIf="plan"
+        type="number"
+        class="form-control"
+        id="apple"
+        placeholder="План: {{plan.apple}}"
+        formControlName="apple"
+        required
+      >
+    </div>
+
+    <span *ngIf="apple.invalid && apple.touched" class="alert alert-danger small">
+      <span *ngIf="apple.errors.required">
+        Поле не должно быть пустым.
+      </span>
+    </span>
+  </div>
+
+
+  <div class="form-group row">
+    <label for="pear" class="col-sm-2 col-form-label">Груши, кг:</label>
+    <div class="col-sm-2">
+      <input *ngIf="plan"
+        type="number"
+        class="form-control"
+        id="pear"
+        placeholder="План: {{plan.pear}}"
+        formControlName="pear"
+        required
+      >
+    </div>
+
+    <span *ngIf="pear.invalid && pear.touched" class="alert alert-danger small">
+      <span *ngIf="pear.errors.required">
+        Поле не должно быть пустым.
+      </span>
+    </span>
+  </div>
+
+
+  <div class="form-group row">
+    <label for="plum" class="col-sm-2 col-form-label">Сливы, кг:</label>
+    <div class="col-sm-2">
+      <input *ngIf="plan"
+        type="number"
+        class="form-control"
+        id="plum"
+        placeholder="План: {{plan.plum}}"
+        formControlName="plum"
+        required
+      >
+    </div>
+
+    <span *ngIf="plum.invalid && plum.touched" class="alert alert-danger small">
+      <span *ngIf="plum.errors.required">
+        Поле не должно быть пустым.
+      </span>
+    </span>
+  </div>
+
+
+
+	<div class="form-group">
+    <button
+      type="submit"
+      class="btn btn-block btn-primary"
+      (click)="onSubmit()"
+      [disabled]="form.invalid"
+    >Отправить</button>
+	</div>
+
+</form>

@@ -1,1 +1,81 @@
-<p>inp-seedling works!</p>
+<h3>Итоги по посадке деревьев</h3>
+
+<p>Заполните поля</p>
+
+<form [formGroup]="form">
+
+	<div class="form-group row">
+    <label for="pine" class="col-sm-2 col-form-label">Сосна, шт:</label>
+    <div class="col-sm-2">
+      <input *ngIf="plan"
+        type="number"
+        class="form-control"
+        id="pine"
+        placeholder="План: {{plan.pine}}"
+        formControlName="pine"
+        required
+      >
+    </div>
+
+    <span *ngIf="pine.invalid && pine.touched" class="alert alert-danger small">
+      <span *ngIf="pine.errors.required">
+        Поле не должно быть пустым.
+      </span>
+    </span>
+  </div>
+
+
+  <div class="form-group row">
+    <label for="oak" class="col-sm-2 col-form-label">Дуб, шт:</label>
+    <div class="col-sm-2">
+      <input *ngIf="plan"
+        type="number"
+        class="form-control"
+        id="oak"
+        placeholder="План: {{plan.oak}}"
+        formControlName="oak"
+        required
+      >
+    </div>
+
+    <span *ngIf="oak.invalid && oak.touched" class="alert alert-danger small">
+      <span *ngIf="oak.errors.required">
+        Поле не должно быть пустым.
+      </span>
+    </span>
+  </div>
+
+
+  <div class="form-group row">
+    <label for="birch" class="col-sm-2 col-form-label">Береза, шт:</label>
+    <div class="col-sm-2">
+      <input *ngIf="plan"
+        type="number"
+        class="form-control"
+        id="birch"
+        placeholder="План: {{plan.birch}}"
+        formControlName="birch"
+        required
+      >
+    </div>
+
+    <span *ngIf="birch.invalid && birch.touched" class="alert alert-danger small">
+      <span *ngIf="birch.errors.required">
+        Поле не должно быть пустым.
+      </span>
+    </span>
+  </div>
+
+
+
+	<div class="form-group">
+    <button
+      type="submit"
+      class="btn btn-block btn-primary"
+      (click)="onSubmit()"
+      [disabled]="form.invalid"
+    >Отправить</button>
+	</div>
+
+</form>
+
