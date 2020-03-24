@@ -1,0 +1,23 @@
+th {
+  text-align: center;
+}
+
+td.right {
+  text-align: right;
+}
+
+.bg-grey {
+  background-color: rgba(0, 0, 0, 0.075);
+}
+
+.table .table-bordered th, th, td {
+  border: 1px solid black;
+}
+
+.table thead th {
+  border-bottom: 1px solid black;
+}
+
+.table thead  {
+  border-bottom: 2px solid black;
+}

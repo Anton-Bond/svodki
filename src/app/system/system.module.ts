@@ -8,7 +8,6 @@ import { HeaderComponent } from './shared/components/header/header.component';
 import { DropdownDirective } from './shared/directives/dropdown.directive';
 import { InputsModule } from './inputs/inputs.module';
 import { ResultsModule } from './results/results.module';
-import { BuhModule } from './buh/buh.module';
 
 
 @NgModule({
@@ -22,7 +21,6 @@ import { BuhModule } from './buh/buh.module';
     CommonModule,
     InputsModule,
     ResultsModule,
-    BuhModule,
     SystemRoutingModule,
   ]
 })

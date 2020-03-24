@@ -1,1 +1,62 @@
-<p>res-seedling works!</p>
+<h3>Итоги по посадке деревьев</h3>
+
+<table class="table table-bordered">
+	<thead>
+		<tr class="table-active">
+			<th rowspan="2" scope="col">#</th>
+			<th rowspan="2" scope="col">Фамилия</th>
+      <th colspan="4" scope="col">Сосна</th>
+      <th colspan="4" scope="col">Дуб</th>
+      <th colspan="4" scope="col">Береза</th>
+		</tr>
+		<tr class="table-active">
+      <th scope="col">План, шт</th>
+      <th scope="col">Факт, шт</th>
+      <th scope="col">%</th>
+      <th scope="col">+/-, шт</th>
+
+      <th scope="col">План, шт</th>
+      <th scope="col">Факт, шт</th>
+      <th scope="col">%</th>
+      <th scope="col">+/-, шт</th>
+
+      <th scope="col">План, шт</th>
+      <th scope="col">Факт, шт</th>
+      <th scope="col">%</th>
+      <th scope="col">+/-, шт</th>
+    </tr>
+	</thead>
+	<tbody>
+		<tr *ngFor="let category of categories; let i=index">
+      <th scope="row">{{i + 1}}</th>
+
+      <td>{{category.worker}}</td>
+
+      <td class="right">{{plan.pine}}</td>
+      <td class="right">{{category.pine}}</td>
+			<td class="right">{{((category.pine / plan.pine) * 100) | number:'.2-2'}}%</td>
+      <td class="right">{{category.pine - plan.pine}}</td>
+
+      <td class="right">{{plan.oak}}</td>
+      <td class="right">{{category.oak}}</td>
+			<td class="right">{{((category.oak / plan.oak) * 100) | number:'.2-2'}}%</td>
+      <td class="right">{{category.oak - plan.oak}}</td>
+
+      <td class="right">{{plan.birch}}</td>
+      <td class="right">{{category.birch}}</td>
+			<td class="right">{{((category.birch / plan.birch) * 100) | number:'.2-2'}}%</td>
+			<td class="right">{{category.birch - plan.birch}}</td>
+
+    </tr>
+
+    <tr class="bg-grey">
+      <th></th>
+      <td>Итого</td>
+
+      <td></td><td class="right">{{totalPine}}</td><td></td><td></td>
+      <td></td><td class="right">{{totalOak}}</td><td></td><td></td>
+      <td></td><td class="right">{{totalBirch}}</td><td></td><td></td>
+    </tr>
+	</tbody>
+</table>
+

@@ -7,9 +7,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
 
+  dir = '';
   constructor() { }
 
   ngOnInit() {
+    const user = JSON.parse(window.localStorage.getItem('user'));
+    if (user.email === 'dispetcher@test.by') {
+      this.dir='results';
+    } else {
+      this.dir='inputs';
+    }
+
   }
 
 }

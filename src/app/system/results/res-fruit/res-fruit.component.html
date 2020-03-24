@@ -1,1 +1,59 @@
-<p>res-fruit works!</p>
+<h3>Итоги по сбору фруктов</h3>
+
+<table class="table table-bordered">
+	<thead>
+		<tr class="table-active">
+			<th rowspan="2" scope="col">#</th>
+			<th rowspan="2" scope="col">Фамилия</th>
+      <th colspan="4" scope="col">Яблоки</th>
+      <th colspan="4" scope="col">Груши</th>
+      <th colspan="4" scope="col">Сливы</th>
+		</tr>
+		<tr class="table-active">
+      <th scope="col">План</th>
+      <th scope="col">Факт</th>
+      <th scope="col">%</th>
+      <th scope="col">+/-</th>
+
+      <th scope="col">План</th>
+      <th scope="col">Факт</th>
+      <th scope="col">%</th>
+      <th scope="col">+/-</th>
+
+      <th scope="col">План</th>
+      <th scope="col">Факт</th>
+      <th scope="col">%</th>
+      <th scope="col">+/-</th>
+    </tr>
+	</thead>
+	<tbody>
+		<tr *ngFor="let category of categories; let i=index">
+      <th scope="row">{{i + 1}}</th>
+      <td>{{category.worker}}</td>
+
+      <td class="right">{{plan.apple}}</td>
+      <td class="right">{{category.apple}}</td>
+			<td class="right">{{((category.apple / plan.apple) * 100) | number:'.2-2'}}%</td>
+      <td class="right">{{category.apple - plan.apple}}</td>
+
+      <td class="right">{{plan.pear}}</td>
+      <td class="right">{{category.pear}}</td>
+			<td class="right">{{((category.pear / plan.pear) * 100) | number:'.2-2'}}%</td>
+      <td class="right">{{category.pear - plan.pear}}</td>
+
+      <td class="right">{{plan.plum}}</td>
+      <td class="right">{{category.plum}}</td>
+			<td class="right">{{((category.plum / plan.plum) * 100) | number:'.2-2'}}%</td>
+			<td class="right">{{category.plum - plan.plum}}</td>
+
+    </tr>
+    <tr class="bg-grey">
+      <th></th>
+      <td>Итого</td>
+
+      <td></td><td class="right">{{totalApple}}</td><td></td><td></td>
+      <td></td><td class="right">{{totalPear}}</td><td></td><td></td>
+      <td></td><td class="right">{{totalPlum}}</td><td></td><td></td>
+    </tr>
+	</tbody>
+</table>

@@ -1,1 +1,62 @@
-<p>res-vegetable works!</p>
+<h3>Итоги по сбору овощей</h3>
+
+<table class="table table-bordered">
+	<thead>
+		<tr class="table-active">
+			<th rowspan="2" scope="col">#</th>
+			<th rowspan="2" scope="col">Фамилия</th>
+      <th colspan="4" scope="col">Капуста</th>
+      <th colspan="4" scope="col">Морковь</th>
+      <th colspan="4" scope="col">Лук</th>
+		</tr>
+		<tr class="table-active">
+      <th scope="col">План, кг</th>
+      <th scope="col">Факт, кг</th>
+      <th scope="col">%</th>
+      <th scope="col">+/-, кг</th>
+
+      <th scope="col">План, кг</th>
+      <th scope="col">Факт, кг</th>
+      <th scope="col">%</th>
+      <th scope="col">+/-, кг</th>
+
+      <th scope="col">План, кг</th>
+      <th scope="col">Факт, кг</th>
+      <th scope="col">%</th>
+      <th scope="col">+/-, кг</th>
+    </tr>
+	</thead>
+	<tbody>
+		<tr *ngFor="let category of categories; let i=index">
+      <th scope="row">{{i + 1}}</th>
+
+      <td>{{category.worker}}</td>
+
+      <td class="right">{{plan.cabbage}}</td>
+      <td class="right">{{category.cabbage}}</td>
+			<td class="right">{{((category.cabbage / plan.cabbage) * 100) | number:'.2-2'}}%</td>
+      <td class="right">{{category.cabbage - plan.cabbage}}</td>
+
+      <td class="right">{{plan.carrot}}</td>
+      <td class="right">{{category.carrot}}</td>
+			<td class="right">{{((category.carrot / plan.carrot) * 100) | number:'.2-2'}}%</td>
+      <td class="right">{{category.carrot - plan.carrot}}</td>
+
+      <td class="right">{{plan.onion}}</td>
+      <td class="right">{{category.onion}}</td>
+			<td class="right">{{((category.onion / plan.onion) * 100) | number:'.2-2'}}%</td>
+			<td class="right">{{category.onion - plan.onion}}</td>
+
+    </tr>
+
+    <tr class="bg-grey">
+      <th></th>
+      <td>Итого</td>
+
+      <td></td><td class="right">{{totalCabbage}}</td><td></td><td></td>
+      <td></td><td class="right">{{totalCarrot}}</td><td></td><td></td>
+      <td></td><td class="right">{{totalOnion}}</td><td></td><td></td>
+    </tr>
+	</tbody>
+</table>
+

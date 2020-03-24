@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router
   ) { }
- 
+
   ngOnInit() {
     this.message = new Message('danger', '');
     this.form = new FormGroup({
@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
       password: new FormControl(null, [
         Validators.required,
         Validators.minLength(6),
-      ]),    
+      ]),
     })
 
     this.route.queryParams.subscribe((params: Params) => {
@@ -58,15 +58,21 @@ export class LoginComponent implements OnInit {
           if ( user.password === formData.password) {
             this.showMessage('');
             this.authService.login(user);
-            this.router.navigate(
-              ['/system', 'buh', 'bill']
-            );
+            if (user.email === 'dispetcher@test.by') {
+              this.router.navigate(
+                ['/system', 'results', 'fruit']
+              );
+            } else if (user.email === 'ivanov@test.by' || user.email === 'petrov@test.by' || user.email === 'sidorov@test.by') {
+              this.router.navigate(
+                ['/system', 'inputs', 'fruit']
+              );
+            }
           } else {
             this.showMessage('Пароль не верный');
           }
         } else {
           this.showMessage('Такого пользователя не существует');
-        } 
+        }
       });
   }
 
