@@ -10,15 +10,15 @@ import { InpSeedlingComponent } from './inputs/inp-seedling/inp-seedling.compone
 import { ResFruitComponent } from './results/res-fruit/res-fruit.component';
 import { ResVegetableComponent } from './results/res-vegetable/res-vegetable.component';
 import { ResSeedlingComponent } from './results/res-seedling/res-seedling.component';
-
-
+import { EndPageComponent } from './inputs/end-page/end-page.component';
 
 const routes: Routes = [
   { path: 'system', component: SystemComponent , children: [
     { path: 'inputs', component: InputsComponent, children: [
       { path: 'fruit', component: InpFruitComponent },
       { path: 'vegetable', component: InpVegetableComponent },
-      { path: 'seedling', component: InpSeedlingComponent }
+      { path: 'seedling', component: InpSeedlingComponent },
+      { path: 'endPage', component: EndPageComponent },
     ] },
     { path: 'results', component: ResultsComponent, children: [
       { path: 'fruit', component: ResFruitComponent },

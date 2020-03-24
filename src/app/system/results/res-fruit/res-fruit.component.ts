@@ -13,6 +13,7 @@ export class ResFruitComponent implements OnInit {
 
   category = 'fruit';
 
+  date = (new Date()).toLocaleDateString();
   categories: Fruit[] = [];
   plan: Fruit;
 
@@ -28,7 +29,12 @@ export class ResFruitComponent implements OnInit {
     this.categoryService.getResults(this.category)
       .subscribe(categories => {
         this.plan = categories.shift();
-        this.categories = categories;
+        this.categories = categories.filter(c => c.date === this.date);
+        if (this.categories.length === 0) {
+          this.categories.push({date: this.date, worker: 'Иванов', apple: 0, pear: 0, plum: 0});
+          this.categories.push({date: this.date, worker: 'Петров', apple: 0, pear: 0, plum: 0});
+          this.categories.push({date: this.date, worker: 'Сидоров', apple: 0, pear: 0, plum: 0});
+        }
         categories.forEach(category => {
           this.totalApple += category.apple;
           this.totalPear += category.pear;
