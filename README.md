@@ -1,5 +1,31 @@
 # Svodki
 
+This is application .
+Based on Angular, ExpressJS, MySQL
+
+## Before use
+
+$ git clone
+
+Add node_modules
+
+$ npm install
+
+For client part:
+
+$ cd client/
+
+$ npm install
+
+## Run server side
+
+In root directory
+
+$ npm run server
+
+Listen on http://localhost:3000
+
+## Client part
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.18.
 
 ## Development server
