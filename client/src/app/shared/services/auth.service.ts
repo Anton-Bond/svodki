@@ -1,25 +1,46 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import {tap} from 'rxjs/operators';
 
-import { User } from '../models/user.model';
+import { User } from '../interfaces';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor() { }
+  private token = null
 
-  login(user: User) {
-    window.localStorage.setItem('user', JSON.stringify(user));
+  constructor(private http: HttpClient) {
+  }
+
+  login(user: User): Observable<{token: string}> {
+    return this.http.post<{token: string}>('/api/auth/login', user)
+      .pipe(
+        tap(
+          ({token}) => {
+            localStorage.setItem('auth-token', token);
+            this.setToken(token);
+          }
+        )
+      )
+  }
+
+  setToken(token: string) {
+    this.token = token
+  }
+
+  getToken(): string {
+    return this.token
+  }
+
+  isAuthenticated(): boolean {
+    return !!this.token
   }
 
   logout() {
-    //window.localStorage.removeItem('user');
-    window.localStorage.clear();
+    this.setToken(null)
+    localStorage.clear()
   }
-
-  isLoggedIn(): boolean {
-    return window.localStorage.getItem('user') !== null;
-  }
-
 }

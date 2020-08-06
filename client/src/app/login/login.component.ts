@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Validators, FormGroup, FormControl } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import {Subscription} from 'rxjs';
 
 import { User } from '../shared/models/user.model';
-import { UsersService } from '../shared/services/users.service';
 import { AuthService } from '../shared/services/auth.service';
+import { UsersService } from '../shared/services/users.service';
 import { Message } from '../shared/models/message.model';
 
 @Component({
@@ -12,14 +13,15 @@ import { Message } from '../shared/models/message.model';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
 
   form: FormGroup;
   message: Message;
+  aSub: Subscription;
 
   constructor(
-    private usersService: UsersService,
     private authService: AuthService,
+    private usersService: UsersService,
     private route: ActivatedRoute,
     private router: Router
   ) { }
@@ -33,7 +35,7 @@ export class LoginComponent implements OnInit {
       ]),
       password: new FormControl(null, [
         Validators.required,
-        Validators.minLength(6),
+        Validators.minLength(5),
       ]),
     })
 
@@ -46,34 +48,31 @@ export class LoginComponent implements OnInit {
 
   }
 
+  ngOnDestroy() {
+    if (this.aSub) {
+      this.aSub.unsubscribe();
+    }
+  }
+
   private showMessage(text: string, type: string = 'danger') {
     this.message = new Message(type, text);
   }
 
   onSubmit() {
-    const formData = this.form.value;
-    this.usersService.getUserByEmail(formData.email)
-      .subscribe((user: User) => {
-        if (user) {
-          if ( user.password === formData.password) {
-            this.showMessage('');
-            this.authService.login(user);
-            if (user.email === 'dispetcher@test.by') {
-              this.router.navigate(
-                ['/system', 'results', 'fruit']
-              );
-            } else if (user.email === 'ivanov@test.by' || user.email === 'petrov@test.by' || user.email === 'sidorov@test.by') {
-              this.router.navigate(
-                ['/system', 'inputs', 'fruit']
-              );
-            }
-          } else {
-            this.showMessage('Пароль не верный');
-          }
+    this.form.disable();
+    this.aSub = this.authService.login(this.form.value).subscribe(
+      (data) => {
+        const route: string = this.usersService.route(data.token);
+        if (route === 'svadmin') {
+          this.router.navigate([`/${route}`]);
         } else {
-          this.showMessage('Такого пользователя не существует');
+          this.router.navigate([`/system/${route}`]);
         }
-      });
+      }, error => {
+        this.showMessage(error.error.message);
+        this.form.enable();
+      }
+    );
   }
 
 }

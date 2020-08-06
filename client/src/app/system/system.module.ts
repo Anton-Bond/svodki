@@ -9,13 +9,12 @@ import { DropdownDirective } from './shared/directives/dropdown.directive';
 import { InputsModule } from './inputs/inputs.module';
 import { ResultsModule } from './results/results.module';
 
-
 @NgModule({
   declarations: [
     SystemComponent,
     SidebarComponent,
     HeaderComponent,
-    DropdownDirective
+    DropdownDirective,
   ],
   imports: [
     CommonModule,

@@ -24,8 +24,8 @@ const routes: Routes = [
       { path: 'fruit', component: ResFruitComponent },
       { path: 'vegetable', component: ResVegetableComponent },
       { path: 'seedling', component: ResSeedlingComponent }
-    ] }
-  ]}
+    ] },
+  ],},
 ];
 
 @NgModule({

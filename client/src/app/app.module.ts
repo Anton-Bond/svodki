@@ -9,11 +9,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { UsersService } from './shared/services/users.service';
 import { AuthService } from './shared/services/auth.service';
 import { SystemModule } from './system/system.module';
+import { AdminModule } from './admin/admin.module';
+import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    NotFoundPageComponent
   ],
   imports: [
     FormsModule,
@@ -21,6 +24,7 @@ import { SystemModule } from './system/system.module';
     ReactiveFormsModule,
     HttpClientModule,
     SystemModule,
+    AdminModule,
     AppRoutingModule  // can be last
   ],
   providers: [
