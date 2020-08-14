@@ -1,0 +1,109 @@
+<div *ngIf="!isLoaded">
+ Loading...
+</div>
+
+
+<div *ngIf="isLoaded">
+
+  <div class="page-title">
+    <h4>
+      <a routerLink="/svadmin/users">назад</a>
+      <div>
+        Редактирование данных пользователя "{{user.name}}"
+      </div>
+    </h4>
+      <button
+        class="btn btn-small red"
+        (click)="removeById()"
+      >
+        <i class="material-icons">delete</i>
+      </button>
+  </div>
+
+  <!-- FORM USER DATA-->
+  <div class="row" *ngIf="!editPass">
+    <form class="col s12 l6" [formGroup]="form" (ngSubmit)="onSubmit()">
+
+      <!-- NAME -->
+      <div class="input-field">
+        <label for="name">Название:</label>
+        <input
+          formControlName="name"
+          id="name"
+          type="text"
+          [ngClass]="{'invalid': form.get('name').invalid && form.get('name').touched}"
+        >
+
+        <span
+          class="helper-text red-text"
+          *ngIf="form.get('name').invalid && form.get('name').touched"
+        >
+          <span *ngIf="form.get('name').errors['required']">
+            Название не может быть пустым.
+          </span>
+        </span>
+      </div>
+
+
+      <!-- EMAIL -->
+      <div class="input-field">
+        <label for="email">Электронная почта:</label>
+        <input
+          formControlName="email"
+          id="email"
+          type="text"
+          [ngClass]="{'invalid': form.get('email').invalid && form.get('email').touched}"
+        >
+
+        <span
+          class="helper-text red-text"
+          *ngIf="form.get('email').invalid && form.get('email').touched"
+        >
+          <span *ngIf="form.get('prodCode').errors['required']">
+            Email не может быть пустым.
+          </span>
+        </span>
+      </div>
+
+      <!-- ROLE -->
+      <div class="input-field">
+        <label for="role">Привелегия:</label>
+        <select
+          name="role"
+          id="role"
+          formControlName="role"
+          [ngClass]="{'invalid': form.get('role').invalid && form.get('role').touched}"
+          required
+        >
+          <option *ngFor="let role of roles" [value]="role.type">
+            {{role.name}}
+          </option>
+        </select>
+        <span
+          class="helper-text red-text"
+          *ngIf="form.get('role').invalid && form.get('role').touched"
+        >
+          <span *ngIf="form.get('role').errors['required']">
+            Выберите привелегию.
+          </span>
+        </span>
+      </div>
+
+      <div>
+        <a
+          routerLink="/svadmin/users/passw/{{user.id}}/{{user.name}}"
+        >Изменить пароль</a>
+      </div>
+
+      <div>
+        <button
+          type="submit"
+          [disabled]="form.invalid || form.disabled"
+          class="waves-effect waves-light btn"
+        >
+          Сохранить изменения
+        </button>
+      </div>
+    </form>
+
+</div>

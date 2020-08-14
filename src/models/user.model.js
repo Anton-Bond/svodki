@@ -78,9 +78,11 @@ User.findByEmail = (email, result) => {
 };
 
 User.updateById = (id, user, result) => {
+
+  // console.log('update from model >> ', id);
   sql.query(
-    'UPDATE users SET email = ?, password = ?, name = ? WHERE id = ?',
-    [user.email, user.password, user.name, id],
+    'UPDATE users SET email = ?, name = ?, role = ? WHERE id = ?',
+    [user.email, user.name, user.role, id],
     (err, res) => {
       if (err) {
         console.log('error: ', err);
@@ -96,6 +98,30 @@ User.updateById = (id, user, result) => {
 
       console.log('updated user: ', { id: id, ...user });
       result(null, { id: id, ...user });
+    },
+  );
+};
+
+
+User.updatePasswById = (id, passw, result) => {
+  sql.query(
+    'UPDATE users SET password = ? WHERE id = ?',
+    [passw, id],
+    (err, res) => {
+      if (err) {
+        console.log('error: ', err);
+        result(null, err);
+        return;
+      }
+
+      if (res.affectedRows == 0) {
+        // not found User with the id
+        result({ kind: 'not_found' }, null);
+        return;
+      }
+
+      console.log('updated password user with id: ', id);
+      result(null, id);
     },
   );
 };

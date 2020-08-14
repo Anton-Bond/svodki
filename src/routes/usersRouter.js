@@ -14,6 +14,9 @@ router.get('/:userId', controller.findById);
 // Update a User with userId
 router.put('/:userId', controller.update);
 
+// change user password
+router.put('/passw/:userId', controller.updatePassw);
+
 // Delete a User with userId
 router.delete('/:userId', controller.deleteOne);
 

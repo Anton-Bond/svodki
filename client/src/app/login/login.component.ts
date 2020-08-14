@@ -3,10 +3,9 @@ import { Validators, FormGroup, FormControl } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import {Subscription} from 'rxjs';
 
-import { User } from '../shared/models/user.model';
 import { AuthService } from '../shared/services/auth.service';
 import { UsersService } from '../shared/services/users.service';
-import { Message } from '../shared/models/message.model';
+import { Message } from '../shared/interfaces';
 
 @Component({
   selector: 'app-login',
@@ -27,7 +26,15 @@ export class LoginComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.message = new Message('danger', '');
+    // this.message = new Message('danger', '');
+    // this.message = Object.assign({}, {
+    //   type: 'danger',
+    //   text: ''
+    // })
+    this.message = {
+      type: 'danger',
+      text: ''
+    }
     this.form = new FormGroup({
       email: new FormControl(null, [
         Validators.required,
@@ -55,14 +62,15 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   private showMessage(text: string, type: string = 'danger') {
-    this.message = new Message(type, text);
+    // this.message = new Message(type, text);
+    this.message = {type, text};
   }
 
   onSubmit() {
     this.form.disable();
     this.aSub = this.authService.login(this.form.value).subscribe(
-      (data) => {
-        const route: string = this.usersService.route(data.token);
+      () => {
+        const route: string = this.authService.route();
         if (route === 'svadmin') {
           this.router.navigate([`/${route}`]);
         } else {

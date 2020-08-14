@@ -16,14 +16,14 @@ module.exports.create = async (req, res) => {
       // user exist with that email
       if (err.noExistUser) {
         // Create a User
-        const salt = bcrypt.genSaltSync(10)
-        const password = req.body.user.password
+        const salt = bcrypt.genSaltSync(10);
+        const password = req.body.user.password;
         const user = new User({
           email: req.body.user.email,
           password: bcrypt.hashSync(password, salt),
           name: req.body.user.name,
           role: req.body.user.role
-        })
+        });
 
         // Save User in the database
         User.create(user, (err, data) => {
@@ -83,7 +83,9 @@ module.exports.update = async (req, res) => {
     });
   }
 
-  User.updateById(req.params.userId, new User(req.body.user), (err, data) => {
+  console.log(req.params)
+
+  User.updateById(req.params.userId, new User(req.body), (err, data) => {
     if (err) {
       if (err.kind === 'not_found') {
         res.status(404).send({
@@ -98,6 +100,34 @@ module.exports.update = async (req, res) => {
   });
 };
 
+// Update a User password by the userId in the request
+module.exports.updatePassw = async (req, res) => {
+  // Validate Request
+  if (!req.body) {
+    res.status(400).send({
+      message: 'Content can not be empty!',
+    });
+  }
+
+  const salt = bcrypt.genSaltSync(10);
+  const password = req.body.password;
+
+  User.updatePasswById(req.params.userId, bcrypt.hashSync(password, salt), (err, data) => {
+    if (err) {
+      if (err.kind === 'not_found') {
+        res.status(404).send({
+          message: `Not found User with id ${req.params.userId}.`,
+        });
+      } else {
+        res.status(500).send({
+          message: 'Error updating User with id ' + req.params.userId,
+        });
+      }
+    } else res.send(data);
+  });
+};
+
+
 // Delete a User with the specified userId in the request
 module.exports.deleteOne = async (req, res) => {
   User.remove(req.params.userId, (err, data) => {
@@ -111,7 +141,9 @@ module.exports.deleteOne = async (req, res) => {
           message: 'Could not delete User with id ' + req.params.userId,
         });
       }
-    } else res.send({ message: `User was deleted successfully!` });
+    } else {
+      res.send({ message: `User was deleted successfully!` });
+    }
   });
 };
 

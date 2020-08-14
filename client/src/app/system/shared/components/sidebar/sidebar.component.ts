@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { AuthService } from '../../../../shared/services/auth.service';
+
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
@@ -7,15 +9,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
 
-  dir = '';
-  constructor() { }
+  constructor(private authService: AuthService) { }
+
+  dir: string = '';
+  isAdmin: boolean = false;
+  role: string = 'viewer';
 
   ngOnInit() {
-    const user = JSON.parse(window.localStorage.getItem('user'));
-    if (user.email === 'dispetcher@test.by') {
+    this.role = this.authService.role();
+    this.isAdmin = this.authService.role() === 'svadmin';
+
+    if (this.isAdmin) {
       this.dir='results';
-    } else {
+    } else if (this.role === 'region') {
       this.dir='inputs';
+    } else {
+      this.role = 'viewer';
     }
 
   }

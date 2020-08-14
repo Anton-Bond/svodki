@@ -25,6 +25,7 @@ module.exports.login = async (req, res) => {
         const token = jwt.sign({
           email: data.email,
           userId: data.id,
+          name: data.name,
           role: data.role
         }, keys.jwt, {expiresIn: 60 * 60})
 

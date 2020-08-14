@@ -1,0 +1,66 @@
+<div class="page-title">
+  <h4>
+    <a routerLink="/svadmin/users">Отмена</a>
+    Смена пароля пользователя "{{name}}"
+  </h4>
+</div>
+
+<!-- FORM -->
+<div class="row">
+  <form class="col s12 l6" [formGroup]="form" (ngSubmit)="onSubmit()">
+
+    <!-- PASSWORD -->
+    <div class="input-field">
+      <label for="password">Пароль:</label>
+      <input
+        formControlName="password"
+        id="password"
+        type="password"
+        [ngClass]="{'invalid': form.get('password').invalid && form.get('password').touched}"
+      >
+
+      <span
+        class="helper-text red-text"
+        *ngIf="form.get('password').invalid && form.get('password').touched"
+      >
+        <span *ngIf="form.get('password').errors['required']">
+          Пароль не может быть пустым.
+        </span>
+      </span>
+    </div>
+
+    <!-- REPEAT PASSWORD -->
+    <div class="input-field">
+      <label for="price">Повторите пароль:</label>
+      <input
+        formControlName="repeatPassword"
+        id="repeatPassword"
+        type="password"
+        [ngClass]="{'invalid': form.get('repeatPassword').invalid && form.get('repeatPassword').touched}"
+      >
+
+      <span
+        class="helper-text red-text"
+        *ngIf="form.get('repeatPassword').touched"
+      >
+        <span *ngIf="(form.get('repeatPassword').value !== form.get('password').value)">
+          Пароли не совпадают.
+        </span>
+      </span>
+    </div>
+
+
+    <div>
+      <button
+        type="submit"
+        [disabled]="form.invalid || form.disabled"
+        class="waves-effect waves-light btn"
+      >
+        Изменить пароль
+      </button>
+    </div>
+  </form>
+
+</div>
+
+

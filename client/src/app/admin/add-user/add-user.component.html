@@ -1,0 +1,132 @@
+<div class="page-title">
+  <h4>
+    <a routerLink="/svadmin/users">Отмена</a>
+    Добавление нового пользователя
+  </h4>
+</div>
+
+<!-- FORM -->
+<div class="row">
+  <form class="col s12 l6" [formGroup]="form" (ngSubmit)="onSubmit()">
+
+    <!-- NAME -->
+    <div class="input-field">
+      <label for="name">Название:</label>
+      <input
+        formControlName="name"
+        id="name"
+        type="text"
+        [ngClass]="{'invalid': form.get('name').invalid && form.get('name').touched}"
+      >
+
+      <span
+        class="helper-text red-text"
+        *ngIf="form.get('name').invalid && form.get('name').touched"
+      >
+        <span *ngIf="form.get('name').errors['required']">
+          Название не может быть пустым.
+        </span>
+      </span>
+    </div>
+
+
+    <!-- EMAIL -->
+    <div class="input-field">
+      <label for="email">Электронная почта:</label>
+      <input
+        formControlName="email"
+        id="email"
+        type="text"
+        [ngClass]="{'invalid': form.get('email').invalid && form.get('email').touched}"
+      >
+
+      <span
+        class="helper-text red-text"
+        *ngIf="form.get('email').invalid && form.get('email').touched"
+      >
+        <span *ngIf="form.get('email').errors['required']">
+          Email не может быть пустым.
+        </span>
+      </span>
+    </div>
+
+
+    <!-- PASSWORD -->
+    <div class="input-field">
+      <label for="password">Пароль:</label>
+      <input
+        formControlName="password"
+        id="password"
+        type="password"
+        [ngClass]="{'invalid': form.get('password').invalid && form.get('password').touched}"
+      >
+
+      <span
+        class="helper-text red-text"
+        *ngIf="form.get('password').invalid && form.get('password').touched"
+      >
+        <span *ngIf="form.get('password').errors['required']">
+          Пароль не может быть пустым.
+        </span>
+      </span>
+    </div>
+
+    <!-- REPEAT PASSWORD -->
+    <div class="input-field">
+      <label for="price">Повторите пароль:</label>
+      <input
+        formControlName="repeatPassword"
+        id="repeatPassword"
+        type="password"
+        [ngClass]="{'invalid': form.get('repeatPassword').invalid && form.get('repeatPassword').touched}"
+      >
+
+      <span
+        class="helper-text red-text"
+        *ngIf="form.get('repeatPassword').touched"
+      >
+        <span *ngIf="(form.get('repeatPassword').value !== form.get('password').value)">
+          Пароли не совпадают.
+        </span>
+      </span>
+    </div>
+
+    <!-- ROLE -->
+    <div class="input-field">
+      <label for="role">Привелегия:</label>
+      <select
+        name="role"
+        id="role"
+        formControlName="role"
+        [ngClass]="{'invalid': form.get('role').invalid && form.get('role').touched}"
+        required
+      >
+        <option *ngFor="let role of roles" [value]="role.type">
+          {{role.name}}
+        </option>
+      </select>
+      <span
+        class="helper-text red-text"
+        *ngIf="form.get('role').invalid && form.get('role').touched"
+      >
+        <span *ngIf="form.get('role').errors['required']">
+          Выберите привелегию.
+        </span>
+      </span>
+    </div>
+
+
+    <div>
+      <button
+        type="submit"
+        [disabled]="form.invalid || form.disabled"
+        class="waves-effect waves-light btn"
+      >
+        Сохранить изменения
+      </button>
+    </div>
+  </form>
+
+</div>
+
+

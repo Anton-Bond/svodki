@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import * as jwt_decode from "jwt-decode";
 
-import { User } from 'src/app/shared/models/user.model';
-import { AuthService } from 'src/app/shared/services/auth.service';
+import { AuthService } from '../../../../shared/services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -12,7 +12,7 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 export class HeaderComponent implements OnInit {
 
   date: Date = new Date();
-  user: User;
+  userName: String = '';
 
   constructor(
     private authService: AuthService,
@@ -20,13 +20,17 @@ export class HeaderComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-    this.user = JSON.parse(window.localStorage.getItem('user'));
+    try {
+      this.userName = jwt_decode(localStorage.getItem('auth-token')).name;
+    }
+    catch(err){
+      console.log(err);
+    }
   }
 
   onLogout() {
     this.authService.logout();
     this.router.navigate(['/login']);
-
   }
 
 }

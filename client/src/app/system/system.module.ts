@@ -21,6 +21,11 @@ import { ResultsModule } from './results/results.module';
     InputsModule,
     ResultsModule,
     SystemRoutingModule,
+  ],
+  exports: [
+    DropdownDirective,
+    HeaderComponent,
+    SidebarComponent
   ]
 })
 export class SystemModule { }
